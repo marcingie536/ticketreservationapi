@@ -1,5 +1,3 @@
-// Generated with g9.
-
 package com.zaju.ticketreservationapi.entity;
 
 import java.io.Serializable;
