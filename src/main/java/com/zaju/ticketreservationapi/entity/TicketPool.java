@@ -28,7 +28,7 @@ public class TicketPool implements Serializable {
 	private String description;
 
 	@Column(name="is_sold")
-	private byte isSold;
+	private boolean isSold;
 
 	private double price;
 
@@ -38,11 +38,9 @@ public class TicketPool implements Serializable {
 	@Column(name="tickets_number")
 	private int ticketsNumber;
 
-	//bi-directional many-to-one association to Ticket
 	@OneToMany(mappedBy="ticketPool")
 	private List<Ticket> tickets;
 
-	//bi-directional many-to-one association to Event
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_event")
 	private Event event;
@@ -51,7 +49,7 @@ public class TicketPool implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -59,7 +57,7 @@ public class TicketPool implements Serializable {
 	}
 
 	public Date getCreateDate() {
-		return this.createDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
@@ -67,23 +65,23 @@ public class TicketPool implements Serializable {
 	}
 
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public byte getIsSold() {
-		return this.isSold;
+	public boolean getIsSold() {
+		return isSold;
 	}
 
-	public void setIsSold(byte isSold) {
+	public void setIsSold(boolean isSold) {
 		this.isSold = isSold;
 	}
 
 	public double getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(double price) {
@@ -91,7 +89,7 @@ public class TicketPool implements Serializable {
 	}
 
 	public int getSoldTicketsNumber() {
-		return this.soldTicketsNumber;
+		return soldTicketsNumber;
 	}
 
 	public void setSoldTicketsNumber(int soldTicketsNumber) {
@@ -99,7 +97,7 @@ public class TicketPool implements Serializable {
 	}
 
 	public int getTicketsNumber() {
-		return this.ticketsNumber;
+		return ticketsNumber;
 	}
 
 	public void setTicketsNumber(int ticketsNumber) {
@@ -107,33 +105,18 @@ public class TicketPool implements Serializable {
 	}
 
 	public List<Ticket> getTickets() {
-		return this.tickets;
+		return tickets;
 	}
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
 
-	public Ticket addTicket(Ticket ticket) {
-		getTickets().add(ticket);
-		ticket.setTicketPool(this);
-
-		return ticket;
-	}
-
-	public Ticket removeTicket(Ticket ticket) {
-		getTickets().remove(ticket);
-		ticket.setTicketPool(null);
-
-		return ticket;
-	}
-
 	public Event getEvent() {
-		return this.event;
+		return event;
 	}
 
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-
 }

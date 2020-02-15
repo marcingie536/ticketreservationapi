@@ -34,11 +34,9 @@ public class Organizer implements Serializable {
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="organizer")
 	private List<Event> events;
 
-	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="organizer")
 	private List<User> users;
 
@@ -46,7 +44,7 @@ public class Organizer implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -54,7 +52,7 @@ public class Organizer implements Serializable {
 	}
 
 	public String getAccountNumber() {
-		return this.accountNumber;
+		return accountNumber;
 	}
 
 	public void setAccountNumber(String accountNumber) {
@@ -62,7 +60,7 @@ public class Organizer implements Serializable {
 	}
 
 	public String getAddress() {
-		return this.address;
+		return address;
 	}
 
 	public void setAddress(String address) {
@@ -70,7 +68,7 @@ public class Organizer implements Serializable {
 	}
 
 	public Date getCreateDate() {
-		return this.createDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
@@ -78,7 +76,7 @@ public class Organizer implements Serializable {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -86,7 +84,7 @@ public class Organizer implements Serializable {
 	}
 
 	public String getNip() {
-		return this.nip;
+		return nip;
 	}
 
 	public void setNip(String nip) {
@@ -94,7 +92,7 @@ public class Organizer implements Serializable {
 	}
 
 	public Date getUpdateDate() {
-		return this.updateDate;
+		return updateDate;
 	}
 
 	public void setUpdateDate(Date updateDate) {
@@ -102,47 +100,18 @@ public class Organizer implements Serializable {
 	}
 
 	public List<Event> getEvents() {
-		return this.events;
+		return events;
 	}
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
 
-	public Event addEvent(Event event) {
-		getEvents().add(event);
-		event.setOrganizer(this);
-
-		return event;
-	}
-
-	public Event removeEvent(Event event) {
-		getEvents().remove(event);
-		event.setOrganizer(null);
-
-		return event;
-	}
-
 	public List<User> getUsers() {
-		return this.users;
+		return users;
 	}
 
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
-	public User addUser(User user) {
-		getUsers().add(user);
-		user.setOrganizer(this);
-
-		return user;
-	}
-
-	public User removeUser(User user) {
-		getUsers().remove(user);
-		user.setOrganizer(null);
-
-		return user;
-	}
-
 }

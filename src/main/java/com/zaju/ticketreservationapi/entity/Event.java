@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,10 +26,10 @@ public class Event implements Serializable {
 	private String city;
 
 	@Column(name="coordinate_x")
-	private double coordinateX;
+	private Double coordinateX;
 
 	@Column(name="coordinate_y")
-	private double coordinateY;
+	private Double coordinateY;
 
 	private String country;
 
@@ -43,7 +42,7 @@ public class Event implements Serializable {
 	private Date evenDate;
 
 	@Column(name="is_happened")
-	private byte isHappened;
+	private boolean isHappened;
 
 	private String name;
 
@@ -56,12 +55,10 @@ public class Event implements Serializable {
 	@Column(name="update_date")
 	private Date updateDate;
 
-	//bi-directional many-to-one association to Organizer
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_organizer")
 	private Organizer organizer;
 
-	//bi-directional many-to-one association to TicketPool
 	@OneToMany(mappedBy="event")
 	private List<TicketPool> ticketPools;
 
@@ -69,7 +66,7 @@ public class Event implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -77,7 +74,7 @@ public class Event implements Serializable {
 	}
 
 	public String getCategory() {
-		return this.category;
+		return category;
 	}
 
 	public void setCategory(String category) {
@@ -85,31 +82,31 @@ public class Event implements Serializable {
 	}
 
 	public String getCity() {
-		return this.city;
+		return city;
 	}
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public double getCoordinateX() {
-		return this.coordinateX;
+	public Double getCoordinateX() {
+		return coordinateX;
 	}
 
-	public void setCoordinateX(double coordinateX) {
+	public void setCoordinateX(Double coordinateX) {
 		this.coordinateX = coordinateX;
 	}
 
-	public double getCoordinateY() {
-		return this.coordinateY;
+	public Double getCoordinateY() {
+		return coordinateY;
 	}
 
-	public void setCoordinateY(double coordinateY) {
+	public void setCoordinateY(Double coordinateY) {
 		this.coordinateY = coordinateY;
 	}
 
 	public String getCountry() {
-		return this.country;
+		return country;
 	}
 
 	public void setCountry(String country) {
@@ -117,7 +114,7 @@ public class Event implements Serializable {
 	}
 
 	public Date getCreateDate() {
-		return this.createDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
@@ -125,7 +122,7 @@ public class Event implements Serializable {
 	}
 
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(String description) {
@@ -133,23 +130,23 @@ public class Event implements Serializable {
 	}
 
 	public Date getEvenDate() {
-		return this.evenDate;
+		return evenDate;
 	}
 
 	public void setEvenDate(Date evenDate) {
 		this.evenDate = evenDate;
 	}
 
-	public byte getIsHappened() {
-		return this.isHappened;
+	public boolean isHappened() {
+		return isHappened;
 	}
 
-	public void setIsHappened(byte isHappened) {
+	public void setHappened(boolean isHappened) {
 		this.isHappened = isHappened;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -157,7 +154,7 @@ public class Event implements Serializable {
 	}
 
 	public String getNumber() {
-		return this.number;
+		return number;
 	}
 
 	public void setNumber(String number) {
@@ -165,7 +162,7 @@ public class Event implements Serializable {
 	}
 
 	public String getObject() {
-		return this.object;
+		return object;
 	}
 
 	public void setObject(String object) {
@@ -173,7 +170,7 @@ public class Event implements Serializable {
 	}
 
 	public String getStreet() {
-		return this.street;
+		return street;
 	}
 
 	public void setStreet(String street) {
@@ -181,7 +178,7 @@ public class Event implements Serializable {
 	}
 
 	public Date getUpdateDate() {
-		return this.updateDate;
+		return updateDate;
 	}
 
 	public void setUpdateDate(Date updateDate) {
@@ -189,7 +186,7 @@ public class Event implements Serializable {
 	}
 
 	public Organizer getOrganizer() {
-		return this.organizer;
+		return organizer;
 	}
 
 	public void setOrganizer(Organizer organizer) {
@@ -197,25 +194,10 @@ public class Event implements Serializable {
 	}
 
 	public List<TicketPool> getTicketPools() {
-		return this.ticketPools;
+		return ticketPools;
 	}
 
 	public void setTicketPools(List<TicketPool> ticketPools) {
 		this.ticketPools = ticketPools;
 	}
-
-	public TicketPool addTicketPool(TicketPool ticketPool) {
-		getTicketPools().add(ticketPool);
-		ticketPool.setEvent(this);
-
-		return ticketPool;
-	}
-
-	public TicketPool removeTicketPool(TicketPool ticketPool) {
-		getTicketPools().remove(ticketPool);
-		ticketPool.setEvent(null);
-
-		return ticketPool;
-	}
-
 }

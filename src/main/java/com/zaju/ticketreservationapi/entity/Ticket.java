@@ -25,12 +25,10 @@ public class Ticket implements Serializable {
 
 	private double price;
 
-	//bi-directional many-to-one association to Order
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_order")
 	private Order order;
 
-	//bi-directional many-to-one association to TicketPool
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_pool")
 	private TicketPool ticketPool;
@@ -39,7 +37,7 @@ public class Ticket implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -47,7 +45,7 @@ public class Ticket implements Serializable {
 	}
 
 	public Date getCreateDate() {
-		return this.createDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
@@ -55,7 +53,7 @@ public class Ticket implements Serializable {
 	}
 
 	public double getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(double price) {
@@ -63,7 +61,7 @@ public class Ticket implements Serializable {
 	}
 
 	public Order getOrder() {
-		return this.order;
+		return order;
 	}
 
 	public void setOrder(Order order) {
@@ -71,11 +69,10 @@ public class Ticket implements Serializable {
 	}
 
 	public TicketPool getTicketPool() {
-		return this.ticketPool;
+		return ticketPool;
 	}
 
 	public void setTicketPool(TicketPool ticketPool) {
 		this.ticketPool = ticketPool;
 	}
-
 }

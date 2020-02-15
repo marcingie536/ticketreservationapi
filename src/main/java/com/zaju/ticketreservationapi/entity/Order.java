@@ -25,12 +25,11 @@ public class Order implements Serializable {
 	@Column(name="order_number")
 	private String orderNumber;
 
-	private byte paid;
+	private boolean paid;
 
 	@Column(name="total_price")
 	private double totalPrice;
 
-	//bi-directional many-to-one association to Ticket
 	@OneToMany(mappedBy="order")
 	private List<Ticket> tickets;
 
@@ -38,7 +37,7 @@ public class Order implements Serializable {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -46,7 +45,7 @@ public class Order implements Serializable {
 	}
 
 	public Date getCreateDate() {
-		return this.createDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
@@ -54,23 +53,23 @@ public class Order implements Serializable {
 	}
 
 	public String getOrderNumber() {
-		return this.orderNumber;
+		return orderNumber;
 	}
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
-	public byte getPaid() {
-		return this.paid;
+	public boolean getPaid() {
+		return paid;
 	}
 
-	public void setPaid(byte paid) {
+	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
 
 	public double getTotalPrice() {
-		return this.totalPrice;
+		return totalPrice;
 	}
 
 	public void setTotalPrice(double totalPrice) {
@@ -78,25 +77,10 @@ public class Order implements Serializable {
 	}
 
 	public List<Ticket> getTickets() {
-		return this.tickets;
+		return tickets;
 	}
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-
-	public Ticket addTicket(Ticket ticket) {
-		getTickets().add(ticket);
-		ticket.setOrder(this);
-
-		return ticket;
-	}
-
-	public Ticket removeTicket(Ticket ticket) {
-		getTickets().remove(ticket);
-		ticket.setOrder(null);
-
-		return ticket;
-	}
-
 }

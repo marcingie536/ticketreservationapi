@@ -130,5 +130,5 @@ public class User implements Serializable {
 
 	public void setOrganizer(Organizer organizer) {
 		this.organizer = organizer;
-	}    
+	}
 }
