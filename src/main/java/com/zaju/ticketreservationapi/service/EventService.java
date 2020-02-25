@@ -1,10 +1,12 @@
 package com.zaju.ticketreservationapi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.zaju.ticketreservationapi.entity.Event;
+import com.zaju.ticketreservationapi.exception.EntityNotFoundException;
 import com.zaju.ticketreservationapi.repository.EventRepository;
 
 @Service
@@ -16,11 +18,18 @@ public class EventService implements IEventService {
 		this.eventRepository = eventRepository;
 	}
 	
-	@Override
-	public List<Event> getAll() {
-		List<Event> huj = (List<Event>) eventRepository.findAll();
+	public List<Event> getAll() {		
+		return (List<Event>) eventRepository.findAll();
+	}
+	
+	public Event getById(int id) {
+		Optional<Event> event = eventRepository.findById(id);
 		
-		return huj;
+		if(!event.isPresent()) {
+			throw new EntityNotFoundException(Event.class.getSimpleName(), Integer.toString(id)); 
+		}
+		
+		return event.get();
 	}
 
 }
