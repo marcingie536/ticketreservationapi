@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zaju.ticketreservationapi.dto.EventDTO;
@@ -32,15 +35,25 @@ public class EventController {
 		List<Event> events =  eventService.getAll();
 		List<EventDTO> eventsResult = events.stream().map(event -> modelMapper.map(event, EventDTO.class))
 				.collect(Collectors.toList());
-			
+
 		return ResponseEntity.ok(eventsResult);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<EventDTO> getById(@RequestParam int id) {
+	public ResponseEntity<EventDTO> getById(@PathVariable("id") int id) {
 		Event event = eventService.getById(id);
 		
 		return ResponseEntity.ok(
 				modelMapper.map(event, EventDTO.class));
+	}
+	
+	@PostMapping
+	public ResponseEntity<EventDTO> addEvent(@RequestBody EventDTO event) {
+		
+		Event newEvent = modelMapper.map(event, Event.class);
+		
+		eventService.save(newEvent);
+		
+		return new ResponseEntity<>(modelMapper.map(newEvent, EventDTO.class), HttpStatus.CREATED);
 	}
 }

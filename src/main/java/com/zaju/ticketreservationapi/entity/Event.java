@@ -20,7 +20,7 @@ public class Event implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String category;
 
@@ -66,11 +66,11 @@ public class Event implements Serializable {
 	public Event() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -200,5 +200,14 @@ public class Event implements Serializable {
 
 	public void setTicketPools(List<TicketPool> ticketPools) {
 		this.ticketPools = ticketPools;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", category=" + category + ", city=" + city + ", coordinateX=" + coordinateX
+				+ ", coordinateY=" + coordinateY + ", country=" + country + ", createDate=" + createDate
+				+ ", description=" + description + ", evenDate=" + evenDate + ", isHappened=" + isHappened + ", name="
+				+ name + ", number=" + number + ", object=" + object + ", street=" + street + ", updateDate="
+				+ updateDate + ", organizer=" + organizer + ", ticketPools=" + ticketPools + "]";
 	}
 }

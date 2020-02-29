@@ -3,7 +3,7 @@ package com.zaju.ticketreservationapi.dto;
 import java.util.Date;
 
 public class EventDTO {
-	private int id;
+	private Integer id;
 	private String category;
 	private String city;
 	private Double coordinateX;
@@ -18,10 +18,12 @@ public class EventDTO {
 	private String object;
 	private String street;
 	private Date updateDate;
-	public int getId() {
+	private Integer idOrganizer;
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getCategory() {
@@ -36,16 +38,16 @@ public class EventDTO {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public double getCoordinateX() {
+	public Double getCoordinateX() {
 		return coordinateX;
 	}
-	public void setCoordinateX(double coordinateX) {
+	public void setCoordinateX(Double coordinateX) {
 		this.coordinateX = coordinateX;
 	}
-	public double getCoordinateY() {
+	public Double getCoordinateY() {
 		return coordinateY;
 	}
-	public void setCoordinateY(double coordinateY) {
+	public void setCoordinateY(Double coordinateY) {
 		this.coordinateY = coordinateY;
 	}
 	public String getCountry() {
@@ -72,10 +74,10 @@ public class EventDTO {
 	public void setEvenDate(Date evenDate) {
 		this.evenDate = evenDate;
 	}
-	public boolean getIsHappened() {
+	public boolean isHappened() {
 		return isHappened;
 	}
-	public void setIsHappened(boolean isHappened) {
+	public void setHappened(boolean isHappened) {
 		this.isHappened = isHappened;
 	}
 	public String getName() {
@@ -108,4 +110,10 @@ public class EventDTO {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public Integer getIdOrganizer() {
+		return idOrganizer;
+	}
+	public void setIdOrganizer(Integer idOrganizer) {
+		this.idOrganizer = idOrganizer;
+	}	
 }

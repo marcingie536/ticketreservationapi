@@ -114,4 +114,11 @@ public class Organizer implements Serializable {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Organizer [id=" + id + ", accountNumber=" + accountNumber + ", address=" + address + ", createDate="
+				+ createDate + ", name=" + name + ", nip=" + nip + ", updateDate=" + updateDate + ", events=" + events
+				+ ", users=" + users + "]";
+	}
 }

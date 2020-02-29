@@ -31,5 +31,9 @@ public class EventService implements IEventService {
 		
 		return event.get();
 	}
+	
+	public Event save(Event event) {
+		return eventRepository.save(event);
+	}
 
 }

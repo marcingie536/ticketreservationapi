@@ -9,4 +9,5 @@ public interface IEventService {
 
 	public List<Event> getAll();
 	public Event getById(int id) throws EntityNotFoundException;
+	public Event save(Event event);
 }
