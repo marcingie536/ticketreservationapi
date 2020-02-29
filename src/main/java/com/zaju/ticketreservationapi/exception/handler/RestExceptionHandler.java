@@ -1,7 +1,10 @@
 package com.zaju.ticketreservationapi.exception.handler;
 
+import java.sql.SQLException;
 import java.util.Date;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,24 +21,46 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(EntityNotFoundException.class)
 	protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex, WebRequest request) {
 		
-		ErrorResponseEntity errorResponseEntity = new ErrorResponseEntity();
-		errorResponseEntity.setTimestamp(new Date());
-		errorResponseEntity.setStatus(HttpStatus.NOT_FOUND.value());
-		errorResponseEntity.setError(HttpStatus.NOT_FOUND.name());
-		errorResponseEntity.setMessage(ex.getMessage());
+		ErrorResponseEntity errorResponseEntity = buildResponseEntity(HttpStatus.NOT_FOUND, ex.getMessage());
 		
 		return new ResponseEntity<>(errorResponseEntity, HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<Object> handleEntityNotFound(Exception ex, WebRequest request) {
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex, WebRequest request) {
 		
-		ErrorResponseEntity errorResponseEntity = new ErrorResponseEntity();
-		errorResponseEntity.setTimestamp(new Date());
-		errorResponseEntity.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		errorResponseEntity.setError(HttpStatus.INTERNAL_SERVER_ERROR.name());
-		errorResponseEntity.setMessage(ex.getMessage());
+		RuntimeException cause = (RuntimeException) ex.getCause();
+		
+		if(cause instanceof ConstraintViolationException) {
+			SQLException sqlException = ((ConstraintViolationException) cause).getSQLException();
+			
+			String message = ex.getMessage() + ". " + sqlException.getMessage();
+			
+			ErrorResponseEntity errorResponseEntity = buildResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, message);
+			
+			return new ResponseEntity<>(errorResponseEntity, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return handleUnexpectedException(ex, request);
+	}
+	
+	
+	@ExceptionHandler(Exception.class)
+	protected ResponseEntity<Object> handleUnexpectedException(Exception ex, WebRequest request) {
+		
+		ErrorResponseEntity errorResponseEntity = buildResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 		
 		return new ResponseEntity<>(errorResponseEntity, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	private ErrorResponseEntity buildResponseEntity(HttpStatus status, String message) {
+		ErrorResponseEntity errorResponseEntity = new ErrorResponseEntity();
+		
+		errorResponseEntity.setTimestamp(new Date());
+		errorResponseEntity.setStatus(status.value());
+		errorResponseEntity.setError(status.name());
+		errorResponseEntity.setMessage(message);
+		
+		return errorResponseEntity;
 	}
 }
