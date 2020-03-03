@@ -3,6 +3,8 @@ package com.zaju.ticketreservationapi.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +50,7 @@ public class EventController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<EventDTO> addEvent(@RequestBody EventDTO event) {
+	public ResponseEntity<EventDTO> addEvent(@RequestBody @Valid EventDTO event) {
 		
 		Event newEvent = modelMapper.map(event, Event.class);
 		

@@ -1,12 +1,13 @@
 package com.zaju.ticketreservationapi.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ErrorResponseEntity {
 	private Date timestamp;
 	private int status;
-	private String error;
-	private String message;
+	private String details;
+	private List<String> errors;
 	
 	public Date getTimestamp() {
 		return timestamp;
@@ -20,16 +21,16 @@ public class ErrorResponseEntity {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getError() {
-		return error;
+	public String getDetails() {
+		return details;
 	}
-	public void setError(String error) {
-		this.error = error;
+	public void setDetails(String details) {
+		this.details = details;
 	}
-	public String getMessage() {
-		return message;
+	public List<String> getErrors() {
+		return errors;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
 	}
 }
