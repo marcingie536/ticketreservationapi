@@ -2,22 +2,31 @@ package com.zaju.ticketreservationapi.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class EventDTO {
 	private Integer id;
 	private String category;
+	@NotEmpty
 	private String city;
 	private Double coordinateX;
 	private Double coordinateY;
+	@NotEmpty
 	private String country;
 	private Date createDate;
 	private String description;
 	private Date evenDate;
 	private boolean isHappened;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String number;
 	private String object;
+	@NotEmpty
 	private String street;
 	private Date updateDate;
+	@NotNull
 	private Integer idOrganizer;
 	
 	public Integer getId() {
