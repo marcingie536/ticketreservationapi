@@ -20,7 +20,7 @@ public class TicketPool implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name="create_date")
 	private Date createDate;
@@ -30,13 +30,16 @@ public class TicketPool implements Serializable {
 	@Column(name="is_sold")
 	private boolean isSold;
 
-	private double price;
+	private Double price;
 
 	@Column(name="sold_tickets_number")
-	private int soldTicketsNumber;
+	private Integer soldTicketsNumber;
 
 	@Column(name="tickets_number")
-	private int ticketsNumber;
+	private Integer ticketsNumber;
+	
+	@Column(name="pool_number")
+	private Integer poolNumber;
 
 	@OneToMany(mappedBy="ticketPool")
 	private List<Ticket> tickets;
@@ -48,11 +51,11 @@ public class TicketPool implements Serializable {
 	public TicketPool() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -72,36 +75,44 @@ public class TicketPool implements Serializable {
 		this.description = description;
 	}
 
-	public boolean getIsSold() {
+	public boolean isSold() {
 		return isSold;
 	}
 
-	public void setIsSold(boolean isSold) {
+	public void setSold(boolean isSold) {
 		this.isSold = isSold;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public int getSoldTicketsNumber() {
+	public Integer getSoldTicketsNumber() {
 		return soldTicketsNumber;
 	}
 
-	public void setSoldTicketsNumber(int soldTicketsNumber) {
+	public void setSoldTicketsNumber(Integer soldTicketsNumber) {
 		this.soldTicketsNumber = soldTicketsNumber;
 	}
 
-	public int getTicketsNumber() {
+	public Integer getTicketsNumber() {
 		return ticketsNumber;
 	}
 
-	public void setTicketsNumber(int ticketsNumber) {
+	public void setTicketsNumber(Integer ticketsNumber) {
 		this.ticketsNumber = ticketsNumber;
+	}
+
+	public Integer getPoolNumber() {
+		return poolNumber;
+	}
+
+	public void setPoolNumber(Integer poolNumber) {
+		this.poolNumber = poolNumber;
 	}
 
 	public List<Ticket> getTickets() {
@@ -119,4 +130,11 @@ public class TicketPool implements Serializable {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
+
+	@Override
+	public String toString() {
+		return "TicketPool [id=" + id + ", createDate=" + createDate + ", description=" + description + ", isSold="
+				+ isSold + ", price=" + price + ", soldTicketsNumber=" + soldTicketsNumber + ", ticketsNumber="
+				+ ticketsNumber + "]";
+	}	
 }
