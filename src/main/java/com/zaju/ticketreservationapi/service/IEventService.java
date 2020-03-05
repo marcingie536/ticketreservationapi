@@ -7,7 +7,7 @@ import com.zaju.ticketreservationapi.exception.EntityNotFoundException;
 
 public interface IEventService {
 
-	public List<Event> getAll();
+	public List<Event> getAll(int page, int size);
 	public Event getById(int id) throws EntityNotFoundException;
 	public Event save(Event event);
 }

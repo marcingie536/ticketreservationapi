@@ -3,6 +3,8 @@ package com.zaju.ticketreservationapi.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.zaju.ticketreservationapi.entity.Event;
@@ -18,8 +20,10 @@ public class EventService implements IEventService {
 		this.eventRepository = eventRepository;
 	}
 	
-	public List<Event> getAll() {		
-		return (List<Event>) eventRepository.findAll();
+	public List<Event> getAll(int page, int size) {		
+		Page<Event> eventPage = eventRepository.findAll(PageRequest.of(page, size));
+		
+		return eventPage.getContent();
 	}
 	
 	public Event getById(int id) {

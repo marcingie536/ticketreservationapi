@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zaju.ticketreservationapi.dto.EventDTO;
@@ -32,9 +33,9 @@ public class EventController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<EventDTO>> getAll() {
+	public ResponseEntity<List<EventDTO>> getAll(@RequestParam int page, @RequestParam int size) {
 				
-		List<Event> events =  eventService.getAll();
+		List<Event> events =  eventService.getAll(page, size);
 		List<EventDTO> eventsResult = events.stream().map(event -> modelMapper.map(event, EventDTO.class))
 				.collect(Collectors.toList());
 
